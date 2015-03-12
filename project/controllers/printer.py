@@ -28,7 +28,11 @@ def upload():
             filename = secure_filename(f.filename)
             save_name = u'/home/vagrant/www/suarez/python/pyproject/websites/flask_mvc/project/static/upload/image/'+filename
             m = hashlib.md5()
-            m.update('123456')
+            bytes = f.read(1024)  
+            while(bytes != b''):  
+                m.update(bytes)  
+                bytes = f.read(1024) 
+                #m.update('123456')
             psw = m.hexdigest()
             # f.save(save_name)
             return psw + u''
